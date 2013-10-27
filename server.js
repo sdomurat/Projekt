@@ -35,3 +35,8 @@ var server = http.createServer(function (req, res) {
         }
     });
 });
+
+server.listen(8888, function () {
+	'use strict';
+	console.log("Listening on " + 8888);
+});
