@@ -6,4 +6,4 @@ var socket = io.connect(window.location.hostname),
 	loginU,
 	zadanieF = false,
 	zadanieK = false;
-	
+	//sad
