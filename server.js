@@ -6,7 +6,7 @@ var server = http.createServer(function (req, res) {
     console.log('request starting...');
     if (filePath === './') {
         filePath = './stol.html';
-    }
+    }//sadsda
     extName = path.extname(filePath);
     switch (extName) {
     case '.js':
