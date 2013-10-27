@@ -6,4 +6,8 @@ var socket = io.connect(window.location.hostname),
 	loginU,
 	zadanieF = false,
 	zadanieK = false;
-	//sad
+	
+$(document).ready(function () {
+	var rK, kartyDoRzucenia = [], zaznacz, kartyGracza = [], ustawCzekanie, errorInfo, makaoInfo,
+		figuryDoZadania, uZF, uZK, koloryDoZadania, entry_el, trwaGra, blokada = false;
+};	
