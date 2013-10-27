@@ -1,0 +1,4 @@
+Projekt
+=======
+
+projekt zespołowy
