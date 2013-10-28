@@ -2,4 +2,4 @@
 =======
 
 projekt zespołowy
-gra karciana Makao ttttttt
+gra karciana to difference Makao ttttttt
