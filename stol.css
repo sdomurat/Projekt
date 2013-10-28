@@ -8,3 +8,12 @@ body {
 	margin-bottom: 0;
 	margin-top: 0.5%;
 }
+div#interface {
+	position: relative;
+	border: 2px solid;
+	border-radius: 10px;
+	width: 23%;
+	height: 99%;
+	float: right;
+	background-color: rgba(255, 255, 255, 0.80);
+}
