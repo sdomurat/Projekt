@@ -1,3 +1,20 @@
+var http = require('http'),
+	util = require('util'),
+	fs = require('fs'),
+	path = require('path'),
+	io = require('socket.io'),
+	gra = false,
+	iluGraczy = 2,
+	gracze = [],
+	talia = [],
+	tasTalia = [],
+	odloz = [],
+	kogoRuch,
+	wez,
+	czekanie,
+	zadanaFigura,
+	zadanyKolor;
+
 var server = http.createServer(function (req, res) {
 	'use strict';
     var filePath = '.' + req.url,
