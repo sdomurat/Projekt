@@ -26,5 +26,20 @@ $(document).ready(function () {
 		divZadanie.style.display = '';
 		blokada = false;
 	};
+	uZK = function (e) {//ustaw zadanie koloru
+		var divZadanie = document.querySelector('div#zadanie');
+		if (e.target.id === 'nic') {
+			socket.emit('ustawZadanyKolor', 'nic');
+			zadanieK = false;
+			socket.emit('usunZadanyKolor');
+		} else {
+			socket.emit('ustawZadanyKolor', e.target.id);
+		}
+		socket.emit('uPZKNF'); //ustaw przeciwnikom zadanie koloru na folse
+		socket.emit('rzucKarte', kartyDoRzucenia);
+		divZadanie.innerHTML = '';
+		divZadanie.style.display = '';
+		blokada = false;
+	};
 	
 };	
