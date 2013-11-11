@@ -1,9 +1,9 @@
-﻿***Projekt Zespolowy Makao
+Projekt Zespolowy Makao
 ==========================
 
-*gra karciana Makao
-*Zasady:
-*Niektóre z kart posiadają dodatkowe funkcje:
+gra karciana Makao
+Zasady:
+Niektóre z kart posiadają dodatkowe funkcje:
 	As - zmiana koloru
 	Król czerwone serce - osoba grająca po tobie bierze 5 kart, chyba, że ma króla czarne serce to ty bierzesz 10 kart
 	Król czarne serce - osoba grająca przed tobą bierze 5 kart
