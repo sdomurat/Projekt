@@ -41,5 +41,41 @@ $(document).ready(function () {
 		divZadanie.style.display = '';
 		blokada = false;
 	};
-	
+	// =============== SERWER ===============
+	// ======================================
+
+	entry_el = $('#entry');
+	console.log('connecting…');
+
+	socket.on('connect', function () {
+		console.log('connected!');
+	});
+	socket.on('message', function (msg) {
+		var data = msg.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+		$('#log ul').append('<li>' + data + '</li>');
+		entry_el.focus();
+	});
+
+	socket.on('ustawIstniejacychGraczy', function (gracze) {
+		var gracz = document.querySelectorAll("div#karta_gracza p"), i = 0;
+		for (i = 0; i < gracze.length; i += 1) {
+			gracz[i].textContent = gracze[i].nick;
+			gracz[i].id = gracze[i].nick;
+		}
+	});
+
+	socket.on('ustawGracza', function (gracz) {
+		var g = document.querySelectorAll("div#karta_gracza p"), i = 0;
+		if (username === '') {
+			username = gracz;
+		}
+		for (i = 0; i < g.length; i += 1) {
+			if (g[i].textContent === "Puste") {
+				g[i].textContent = gracz;
+				g[i].id = gracz;
+
+				i = g.length;
+			}
+		}
+	});
 };	

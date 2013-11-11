@@ -8,6 +8,19 @@ body {
 	margin-bottom: 0;
 	margin-top: 0.5%;
 }
+div#stol {
+	width: 100%;
+	height: 97%;
+}
+div#gra {
+	position: relative;
+	border-radius: 10px;
+	border: 2px solid;
+	background-color: rgba(0, 128, 0, 0.65);
+	width: 70%;
+	height: 99%;
+	float: left;
+}
 div#interface {
 	position: relative;
 	border: 2px solid;
@@ -16,4 +29,36 @@ div#interface {
 	height: 99%;
 	float: right;
 	background-color: rgba(255, 255, 255, 0.80);
+}
+div#karta_gracza {
+	height: 40%;
+	border-bottom: 2px solid;
+}
+
+div#karta_gracza table {
+	table-layout: fixed;
+	width: 100%;
+	height: 100%;	
+}
+
+table {
+	border-spacing: 0;
+	text-align: center;
+}
+
+td#g0 {
+	border-right: 1px solid;
+	border-bottom: 1px solid;
+}
+td#g1 {
+	border-bottom: 1px solid;
+	border-left: 1px solid;
+}
+td#g2 {
+	border-top: 1px solid;
+	border-right: 1px solid;
+}
+td#g3 {
+	border-left: 1px solid;
+	border-top: 1px solid;
 }

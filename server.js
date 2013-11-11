@@ -15,6 +15,25 @@ var http = require('http'),
 	zadanaFigura,
 	zadanyKolor;
 
+var Gracz = (function () {
+	"use strict";
+	var nick = "", szefStolu = false, czyGra = true;
+	return {
+		tworzGracza: function (nick, szefStolu, czyGra) {
+			this.nick = nick;
+			this.szefStolu = szefStolu;
+			this.czyGra = czyGra;
+		},
+		getNick: function () { return this.nick; },
+		getSzefStolu: function () { return this.szefStolu; },
+		getCzyGra: function () { return this.czyGra; },
+		getKarty: function () { return this.karty; },
+		setSzefStolu: function (szefStolu) {this.szefStolu = szefStolu; },
+		setCzyGra: function (czyGra) {this.czyGra = czyGra; },
+		karty: []
+	};
+}());	
+	
 var server = http.createServer(function (req, res) {
 	'use strict';
     var filePath = '.' + req.url,
@@ -51,6 +70,23 @@ var server = http.createServer(function (req, res) {
             res.end();
         }
     });
+	
+	client.on('disconnect', function () {
+		for (i = 0; i < gracze.length; i += 1) {
+			if (gracze[i].getNick() === username) {
+				while (gracze[i + 1] !== undefined) {
+					gracze[i] = gracze[i + 1];
+					i += 1;
+				}
+				gracze.pop();
+			}
+		}
+
+		client.broadcast.emit('disconnectGracz', username);
+		client.broadcast.emit('pokazStart');
+		gra = false;
+
+	});
 });
 
 server.listen(8888, function () {
