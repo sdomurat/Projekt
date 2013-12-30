@@ -7,11 +7,17 @@ body {
 	padding: 0;
 	margin-bottom: 0;
 	margin-top: 0.5%;
+	background-image:url('images/makao.jpg');
+}
+div#gracze{
+	float: left;
+    width: 6%;
 }
 div#stol {
 	width: 100%;
 	height: 97%;
 }
+
 div#gra {
 	position: relative;
 	border-radius: 10px;
@@ -21,6 +27,7 @@ div#gra {
 	height: 99%;
 	float: left;
 }
+
 div#interface {
 	position: relative;
 	border: 2px solid;
@@ -30,6 +37,7 @@ div#interface {
 	float: right;
 	background-color: rgba(255, 255, 255, 0.80);
 }
+
 div#karta_gracza {
 	height: 40%;
 	border-bottom: 2px solid;
@@ -62,3 +70,151 @@ td#g3 {
 	border-left: 1px solid;
 	border-top: 1px solid;
 }
+
+div#chat {
+	position: relative;
+	display: block;
+	border: solid black;
+	height: 293px;
+	overflow: auto;
+	background-image: url("images/czat_tlo.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+div#ustawienia {
+	position: relative;
+	display: none;
+	border: solid orange;
+	height: 52%
+}
+
+div#console {
+	position: absolute;
+	width: 98%;
+	right: 5px;
+	bottom: 3px;
+}
+
+div#console input{
+	background-color:#000000;
+	color:#FFFFFF;
+	width: 100%;
+}
+
+.karty {
+	width: 92px;
+	height: 141px;
+	border: 1px solid;
+	border-radius: 5px;
+}
+
+.karty:hover {
+	border-color: blue;
+}
+/* wysuniecie karty jezeli jest nowa */
+.nowa {
+	bottom: 10px;
+}
+
+div#gracz_0 {
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+	margin-top: 90px;
+	height: 144px;
+}
+
+div#gracz_1 {
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+	height: 144px;
+	margin-top: 8px;
+	clear: both; 
+}
+
+div#gracz_1 img {
+	position: absolute;
+}
+
+div#gracz_0 img {
+	position: absolute;
+}
+
+div#zbior {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 60px;
+	position: relative;
+	max-width: 230px;
+	color: white;
+	height: 145px;
+	clear: both; 
+}
+
+div#odloz {
+	float: left;
+
+}
+div#daj {
+	float: right;
+}
+
+div#info {
+	position: absolute;
+	bottom: 190px;
+	right: 35%;
+	width: 30%;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	font-weight: bold;
+	text-align: center;
+}
+div#makao{
+	position: absolute;
+	bottom: 440px;
+	right: 35%;
+	width: 30%;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	font-weight: bold;
+	text-align: center;
+}
+div#zadanie {
+	position: absolute;
+	height: 40%;
+	width: 40%;
+	left: 25%;
+	top: 22%;
+	border: 2px solid black;
+	background-color: white;
+	padding: 5%;
+	display: none;
+	z-index: 1;
+	text-align: center;
+}
+
+div#coZadane {
+	position: absolute;
+	top: 52%;
+	left: 27%;
+}
+
+div#coZadane img.figura {
+	width: 30px;
+	height: 40px;
+	border: 2px solid red;
+	border-radius: 5px;
+}
+
+div#coZadane img.kolor {
+	width: 33px;
+	height: 38px;
+	border: 2px solid red;
+	border-radius: 5px;
+}
+

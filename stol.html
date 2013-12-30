@@ -4,17 +4,34 @@
 		<title>Gra Makao</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<link rel="stylesheet" type="text/css" href="stol.css">
+		<script type="text/javascript" src="domReady.js"></script>
+		<script type="text/javascript" src="zakladki.js"></script>
 		<!-- Serwer -->
 		<script src="jquery.min.js"></script>
-		
+		<script src="socket.io/socket.io.js"></script>
+		 <!-- <script src="skrypt.js"></script> -->
+		<script type="text/javascript" src="makao.js"></script>
 	</head>
 	<body>
-	<div id="stol">
-		<div id="gra">
-			gra
-		</div>
-		<div id="interface">
-			<div id="karta_gracza">				
+		<!-- Blok który odpowiada za stół -->
+		<div id="stol">
+			<!-- W tym bloku będzie rozgrywała się gra -->
+			<div id="gra">
+				<div id="gracz_1" class="krzesla"></div>
+				<div id="zbior">
+					<div id="odloz"><span id="wez">0 </span></div>
+					<div id="daj"><img class="karty" id="talia" src="images/karty/TYL.jpg" alt="" ><span id="ilosc_kart"></span></div>
+				</div>
+				<div id="coZadane"></div>
+				<div id="info"><span></span></div>
+				<div id="makao"><span></span></div>
+				<div id="zadanie"></div>
+				<div id="gracz_0" class="krzesla"></div>
+			</div>
+			<!-- W tym bloku są zawarte informacje o graczach, chat i możliwość ustawiania zasad gry -->
+			<div id="interface">
+				<!-- Lista graczy, informacja o tym ile czasu zostało danemu graczowi -->
+				<div id="karta_gracza">				
 					<table>
 						<tbody>
 							<tr>
@@ -25,8 +42,37 @@
 							</tr>
 						</tbody>
 					</table>
+				</div>
+				<!-- Zakładki -->
+				<div id="zakladki">
+					<input id="start" type="button" value="Start"><span id="zak_chat" style="margin-left: 19px"><img id="img_chat" src="images/przyciski/chat_press.jpg" alt="Chat" style="margin-bottom: -6px"></span><span id="zak_ust" style="margin-left: 20px"><img id="img_ust" src="images/przyciski/ust.jpg" alt="Ustawienia" style="margin-bottom: -6px"></span>
+				</div>
+				<!-- Chat, możliwość komunikacji graczy między sobą -->
+				<div id="chat">
+					<h1>Czat</h1>
+					<div id="log">
+						<ul>
+						</ul>
+ 					</div>
+					<div id="console">
+						<input type="text" id="entry">
+					</div>
+				</div>
+				<!-- W tym bloku ustawiane są zasady gry przez osoba 'zakładającą' stół -->
+				<div id="ustawienia" style="overflow: scroll">
+					<p><strong>Reguły Gry Makao:</strong></p>
+					<p>Niektóre z kart posiadają dodatkowe funkcje:
+						<p><strong>As</strong> - zmiana koloru</p>
+						<p><strong>Król czerwone serce</strong> - osoba grająca po tobie bierze 5 kart, chyba, że ma króla czarne serce to ty bierzesz 10 kart</p>
+						<p><strong>Król czarne serce</strong> - osoba grająca przed tobą bierze 5 kart</p>
+						<p><strong>Walet</strong> - rządasz (ale nie musisz) konkretnych kart bez kart funkcyjnych (2,3,4, walet, król, as), każda osoba która nie ma rządanej karty bierze jedną kartę z kupki</p>
+						<p><strong>4</strong> - stoisz jedną kolejkę, odpowiednio rzucone 2, 3 stoisz 2, 3, jeśli ktoś rzuci 4, ty dorzucisz też 4 to osoba po tobie jeśli nie będzie miała
+						do dorzucenia 4 stoi 2 kolejki</p>
+						<p><strong>3</strong> - trzy karty do wzięcia dla osoby przed tobą</p>
+						<p><strong>2</strong> - dwie karty do wzięcia.</p></p>
+				</div>
 			</div>
+			
 		</div>
-	</div>	
 	</body>
 </html>
