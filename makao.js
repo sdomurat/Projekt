@@ -41,6 +41,14 @@ $(document).ready(function () {
 		divZadanie.style.display = '';
 		blokada = false;
 	};
+	loginU = function () {
+		var login = prompt('Podaj nick:', '');
+		if (login !== null && login !== '') {
+			socket.emit('nowyU', login);
+		} else {
+			loginU();
+		}
+	};
 	// =============== SERWER ===============
 	// ======================================
 
@@ -76,6 +84,31 @@ $(document).ready(function () {
 
 				i = g.length;
 			}
+		}
+	});
+	socket.on('ustawIndex', function (i) {
+		index = i;//kazdy gracz ma swoj index, do spr czy jego ruch
+	});
+	socket.on('disconnectGracz', function (username) {
+		var g = document.querySelectorAll("div#karta_gracza p"), i = 0;
+		for (i = 0; i < g.length; i += 1) {
+			if (g[i].textContent === username) {
+				g[i].textContent = "Puste";
+				//i = 6;
+			}
+		}
+	});
+	loginU();//wywolanie podania loginu
+	
+	// wyslij wiad do chatu
+	entry_el.keypress(function (event) {
+		if (event.keyCode !== 13) {
+			return;
+		}
+		var msg = entry_el.attr('value');
+		if (msg) {
+			socket.emit('message', msg);
+			entry_el.attr('value', '');
 		}
 	});
 };	
