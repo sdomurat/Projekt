@@ -70,6 +70,57 @@ var karta = (function () {
 		setNowa: function (nowa) { this.nowa = nowa; }
 	};
 }());	
+
+//tworzenie talię 52 kart do tab
+var tworzTalie = function () {
+	"use strict";
+	var talia = [], i, j, tabKolor = ['T', 'K', 'P', 'S'], id = 0;
+	//karty 2-10
+	for (i = 0; i < 9; i += 1) {
+		for (j = 0; j < tabKolor.length; j += 1) {
+			if (i + 2 === 2 || i + 2 === 3) {
+				talia.push(Object.create(karta));
+				talia[id].tworzKarte(id, (i + 2) + "_" + tabKolor[j], (i + 2).toString(), tabKolor[j], (i + 2), false, false, false);
+			} else if (i + 2 === 4) {
+				talia.push(Object.create(karta));
+				talia[id].tworzKarte(id, (i + 2) + "_" + tabKolor[j], (i + 2).toString(), tabKolor[j], 0, true, false, false);
+			} else {
+				talia.push(Object.create(karta));
+				talia[id].tworzKarte(id, (i + 2) + "_" + tabKolor[j], (i + 2).toString(), tabKolor[j], 0, false, false, false);
+			}
+			id += 1;
+		}
+	}
+	//Jopek
+	for (j = 0; j < tabKolor.length; j += 1) {
+		talia.push(Object.create(karta));
+		talia[id].tworzKarte(id, "J_" + tabKolor[j], "J", tabKolor[j], 0, false, true, false);
+		id += 1;
+	}
+	//Damy
+	for (j = 0; j < tabKolor.length; j += 1) {
+		talia.push(Object.create(karta));
+		talia[id].tworzKarte(id, "D_" + tabKolor[j], "D", tabKolor[j], 0, false, false, false);
+		id += 1;
+	}
+	//Króle
+	for (j = 0; j < tabKolor.length; j += 1) {
+		talia.push(Object.create(karta));
+		if (tabKolor[j] === 'S' || tabKolor[j] === 'P') {
+			talia[id].tworzKarte(id, "K_" + tabKolor[j], "K", tabKolor[j], 5, false, false, false);
+		} else {
+			talia[id].tworzKarte(id, "K_" + tabKolor[j], "K", tabKolor[j], 0, false, false, false);
+		}
+		id += 1;
+	}
+	//Asy
+	for (j = 0; j < tabKolor.length; j += 1) {
+		talia.push(Object.create(karta));
+		talia[id].tworzKarte(id, "A_" + tabKolor[j], "A", tabKolor[j], 0, false, false, true);
+		id += 1;
+	}
+	return talia;
+};
 	
 var server = http.createServer(function (req, res) {
 	'use strict';
