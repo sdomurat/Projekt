@@ -1,3 +1,4 @@
+/*jslint node: true devel: true*/
 var http = require('http'),
 	util = require('util'),
 	fs = require('fs'),
@@ -69,7 +70,7 @@ var karta = (function () {
 		getZadanieKoloru: function () { return this.zadanieKoloru; },
 		setNowa: function (nowa) { this.nowa = nowa; }
 	};
-}());	
+}());
 
 //tworzenie talię 52 kart do tab
 var tworzTalie = function () {
@@ -121,7 +122,227 @@ var tworzTalie = function () {
 	}
 	return talia;
 };
+
+var sortfun = function (a, b) {
+	"use strict";
+	return a.id - b.id;
+};
+
+//tasowanie kart
+var tasowanie = function (orgTalia) {
+	"use strict";
+	var i,
+		talia = Object.create(orgTalia),
+		randomTalia = []; //tablica przechowująca przetasowane karty
+	while (randomTalia.length !== orgTalia.length) {
+		i = Math.floor(Math.random() * talia.length);
+		randomTalia.push(talia[i]);
+		talia[i] = talia[talia.length - 1];
+		talia.pop();
+	}
+	return randomTalia;
+};
+
+//przetasowanie kart
+var przetasowanie = function () {
+	"use strict";
+	var tmp = odloz.pop(); //zmienna pomocnicza
+
+	tasTalia = Object.create(odloz);
+	tasTalia = tasowanie(tasTalia);
+	odloz = [];
+	odloz.push(tmp);
+};
+//zasady gry
+var zasady = function (k) {
+	"use strict";
+	var kOdlozona = odloz[odloz.length - 1];
+
+	if (zadanaFigura !== undefined) {
+		if (k.getFigura() === zadanaFigura || kOdlozona.getFigura() === k.getFigura()) {//if jop mozna polozyc jop
+			return true;
+		}
+		return false;
+	}
+
+	if (zadanyKolor !== undefined) {
+		if (k.getKolor() === zadanyKolor || kOdlozona.getFigura() === k.getFigura()) {
+			return true;
+		}
+		return false;
+	}
+
+	if (k.getKolor() === kOdlozona.getKolor() || k.getFigura() === kOdlozona.getFigura()) {//zgadza sie kolorlub figura
+		if (wez > 0) { 
+			if (kOdlozona.getMocBicia() > 0) { 
+				if ((k.getKolor() === kOdlozona.getKolor() && k.getMocBicia() > 0) || k.getMocBicia() === kOdlozona.getMocBicia()) {
+					return true;
+				}
+				return false;
+			}
+		}
+		if (czekanie > 0) { //tylko czek karta
+			if (k.getCzekasz() === true) {
+				return true;
+			}
+			return false;
+		}
+		return true;
+	}
+	return false;
+};
+//branie kart
+var dajKarte = function (client) {
+	"use strict";
+	var i;
+
+	if (wez > 0) {
+		for (i = 0; i < wez; i += 1) {
+			gracze[kogoRuch].karty.push(tasTalia.pop()); 
+			gracze[kogoRuch].karty[gracze[kogoRuch].karty.length - 1].setNowa(true);
+			if (tasTalia.length === 0) {
+				przetasowanie();
+			}
+		}
+		wez = 0;
+
+		client.emit('ustawWez', wez);
+		client.broadcast.emit('ustawWez', wez);
+	} else {
+
+		gracze[kogoRuch].karty.push(tasTalia.pop()); //gracz dostaje jedna karte
+		gracze[kogoRuch].karty[gracze[kogoRuch].karty.length - 1].setNowa(true);
+
+		if (tasTalia.length === 0) {
+			przetasowanie();
+		}
+	}
+
+	client.emit('ustawLicznikKart', tasTalia.length);
+	client.broadcast.emit('ustawLicznikKart', tasTalia.length);
+
+	gracze[kogoRuch].karty.sort(sortfun); //sortowanie kart gracza
+	client.emit('ulozWzieteKarty', gracze[kogoRuch].karty);
+
+	for (i = 0; i < gracze[kogoRuch].karty.length; i += 1) {
+		gracze[kogoRuch].karty[i].setNowa(false);
+	}
+
+	kogoRuch = (kogoRuch + 1) % iluGraczy;
+	client.emit('ustawKogoRuch', kogoRuch);
+	client.broadcast.emit('ustawKogoRuch', kogoRuch);
+
+};
+
+var ileNieGra = function () {
+	'use strict';
+	var i, ile = 0;
+	for (i = 0; i < gracze.length; i += 1) {
+		if (gracze[i].getCzyGra() === false) {
+			ile += 1;
+		}
+	}
+	return ile;
+};
+
+//zrzucanie kart
+var rzucKarte = function (karta, client) {
+	"use strict";
+	var i, tmp = [], ile;
+
+	for (i = 0; i < karta.length; i += 1) {
+		odloz.push(gracze[kogoRuch].karty[parseInt(karta[i], 10)]); //rzucona karta wedruje na talie kart odlozonych
+		
+		gracze[kogoRuch].karty[parseInt(karta[i], 10)] = undefined; //rzucane karty gracza sa ustawiane na undefined
+		
+		if (odloz[odloz.length - 1].getMocBicia() > 0) {
+			wez += odloz[odloz.length - 1].getMocBicia();
+			client.emit('ustawWez', wez);
+			client.broadcast.emit('ustawWez', wez);
+		}
+
+		if (odloz[odloz.length - 1].getCzekasz() === true) {
+			czekanie += 1;
+		}
+	}
+	for (i = 0; i < gracze[kogoRuch].karty.length; i += 1) {
+		if (gracze[kogoRuch].karty[i] !== undefined) {
+			tmp.push(gracze[kogoRuch].karty[i]);
+		}
+	}
+	gracze[kogoRuch].karty = tmp;
+
+	client.emit('przeladujKarty', gracze[kogoRuch].karty);
+	client.emit('ustawKarteOdloz', odloz[odloz.length - 1].getNazwa());
+	client.broadcast.emit('ustawKarteOdloz', odloz[odloz.length - 1].getNazwa());
+
+	if (gracze[kogoRuch].karty.length === 0) {
+		gracze[kogoRuch].setCzyGra(false);
+		ile = ileNieGra();
+		if (ile === (gracze.length - 1)) {
+			client.emit('miejsceGracza', ile);
+			client.emit('koniecGry');
+			client.broadcast.emit('koniecGry');
+			client.emit('pokazStart');
+			client.broadcast.emit('pokazStart');
+			gra = false;
+			return;
+		}
+		client.emit('miejsceGracza', ile);
+	}
 	
+	if (gracze[kogoRuch].karty.length === 1) {
+		client.emit('pokazMakao');
+		client.broadcast.emit('pokazMakao');
+	}
+
+	if (odloz[odloz.length - 1].getFigura() === 'K' && odloz[odloz.length - 1].getKolor() === 'P') {
+		kogoRuch = ((kogoRuch - 1) + iluGraczy) % iluGraczy;
+		while (gracze[kogoRuch].getCzyGra() === false) {
+			kogoRuch = ((kogoRuch - 1) + iluGraczy) % iluGraczy;
+		}
+	} else {
+		kogoRuch = (kogoRuch + 1) % iluGraczy;
+		while (gracze[kogoRuch].getCzyGra() === false) {
+			kogoRuch = (kogoRuch + 1) % iluGraczy;
+		}
+	}
+
+	client.emit('ustawKogoRuch', kogoRuch);
+	client.broadcast.emit('ustawKogoRuch', kogoRuch);
+
+	if (czekanie > 0) {
+		client.broadcast.emit('czyCzekasz', czekanie);
+	}
+
+	if ((zadanyKolor !== undefined && odloz[odloz.length - 1].getKolor() !== zadanyKolor && odloz[odloz.length - 1].getFigura() !== 'A') ||
+			(zadanyKolor !== undefined && (odloz[odloz.length - 1].getCzekasz() === true || odloz[odloz.length - 1].getMocBicia() > 0 || odloz[odloz.length - 1].getZadanieFigury() === true))) {//rzucenie zadanego koloru i w tej samej rudzie karte o innym kolorze tej fgury
+		zadanyKolor = undefined;
+		if (odloz[odloz.length - 1].getZadanieFigury() !== true) {
+			client.emit('schowajZadanyKolor');
+			client.broadcast.emit('schowajZadanyKolor');
+		}
+
+		client.broadcast.emit('usunZadanieK');
+		client.emit('usunZadanieK');
+	}
+};
+//zaznaczanie kart/y do rzucenia
+var sprKarte = function (karta, client) {
+	'use strict';
+	if (zasady(gracze[kogoRuch].karty[parseInt(karta, 10)])) {//bo indexy sa w string
+		if (gracze[kogoRuch].karty[parseInt(karta, 10)].getZadanieFigury() === true) {
+			client.emit('ustawZadanieF');
+		}
+
+		if (gracze[kogoRuch].karty[parseInt(karta, 10)].getZadanieKoloru() === true) {
+			client.emit('ustawZadanieK');
+		}
+		client.emit('kartaOk', karta);
+	} else {
+		client.emit('nieTaKarta');
+	}
+};
 var server = http.createServer(function (req, res) {
 	'use strict';
     var filePath = '.' + req.url,
@@ -331,3 +552,4 @@ server.listen(8888, function () {
 	'use strict';
 	console.log("Listening on " + 8888);
 });
+
