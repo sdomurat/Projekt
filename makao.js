@@ -1,3 +1,6 @@
+/*jslint devel: true, node: true, browser: true */
+/*global $: false, io: false, addEvent: false */
+//var socket = io.connect('http://localhost:8888'),
 var socket = io.connect(window.location.hostname),
 	index = -1,
 	kogoRuch,
@@ -8,6 +11,7 @@ var socket = io.connect(window.location.hostname),
 	zadanieK = false;
 	
 $(document).ready(function () {
+	'use strict';
 	var rK, kartyDoRzucenia = [], zaznacz, kartyGracza = [], ustawCzekanie, errorInfo, makaoInfo,
 		figuryDoZadania, uZF, uZK, koloryDoZadania, entry_el, trwaGra, blokada = false;
 		
@@ -26,6 +30,7 @@ $(document).ready(function () {
 		divZadanie.style.display = '';
 		blokada = false;
 	};
+	
 	uZK = function (e) {//ustaw zadanie koloru
 		var divZadanie = document.querySelector('div#zadanie');
 		if (e.target.id === 'nic') {
@@ -41,6 +46,7 @@ $(document).ready(function () {
 		divZadanie.style.display = '';
 		blokada = false;
 	};
+	
 	loginU = function () {
 		var login = prompt('Podaj nick:', '');
 		if (login !== null && login !== '') {
@@ -49,6 +55,79 @@ $(document).ready(function () {
 			loginU();
 		}
 	};
+	
+	figuryDoZadania = function () {
+		var divZadanie = document.querySelector('div#zadanie'), img, i;
+		divZadanie.innerHTML = '<h4>Żądanie figury</h4>' +
+								'<table>' +
+									'<tr>' +
+									'<td><img id="f5" src="images/figury/5.jpg" alt="Figura 5"></td>' +
+									'<td><img id="f6" src="images/figury/6.jpg" alt="Figura 6"></td>' +
+									'<td><img id="f7" src="images/figury/7.jpg" alt="Figura 7"></td>' +
+									'<td><img id="f8" src="images/figury/8.jpg" alt="Figura 8"></td>' +
+									'</tr><tr>' +
+									'<td><img id="f9" src="images/figury/9.jpg" alt="Figura 9"></td>' +
+									'<td><img id="f10" src="images/figury/10.jpg" alt="Figura 10"></td>' +
+									'<td><img id="fD" src="images/figury/D.jpg" alt="Figura Dama"></td>' +
+									'<td><input id="nic" type="button" value="Nic"></td>' +
+									'</tr></table>';
+		divZadanie.style.display = 'block';
+		img = document.querySelectorAll('div#zadanie img');
+		for (i = 0; i < img.length; i += 1) {
+			addEvent(img[i], 'click', uZF); //ustaw zadanie figury
+		}
+		addEvent(document.querySelector('div#zadanie input'), 'click', uZF); //ustaw zadanie figury
+	};
+	
+	koloryDoZadania = function () {
+		var divZadanie = document.querySelector('div#zadanie'), img, i;
+		divZadanie.innerHTML = '<h4>Żądanie koloru</h4>' +
+								'<table>' +
+									'<tr>' +
+									'<td><img id="kS" src="images/kolory/S.jpg" alt="Kolor Kier"></td>' +
+									'<td><img id="kP" src="images/kolory/P.jpg" alt="Kolor Pik"></td>' +
+									'<td><img id="kK" src="images/kolory/K.jpg" alt="Kolor Karo"></td>' +
+									'<td><img id="kT" src="images/kolory/T.jpg" alt="Kolor Trefl"></td>' +
+									'</tr><tr>' +
+									'<td><input id="nic" type="button" value="Nic"></td>' +
+									'</tr></table>';
+		divZadanie.style.display = 'block';
+		img = document.querySelectorAll('div#zadanie img');
+		for (i = 0; i < img.length; i += 1) {
+			addEvent(img[i], 'click', uZK); //ustaw zadanie koloru
+		}
+		addEvent(document.querySelector('div#zadanie input'), 'click', uZK); //uswat zadanie koloru
+	};
+	
+	errorInfo = function (text) {
+		var info = document.querySelector('div#info');
+		info.firstChild.textContent = text;
+		info.style.border = "3px solid red";
+		info.style.color = "red";
+		info.style.backgroundColor = "white";
+
+		setTimeout(function () {
+			info.firstChild.textContent = '';
+			info.style.border = '';
+			info.style.color = '';
+			info.style.backgroundColor = '';
+		}, 1500);
+	};
+	makaoInfo = function (text) {
+		var minfo = document.querySelector('div#makao');
+		minfo.firstChild.textContent = text;
+		minfo.style.border = "3px solid red";
+		minfo.style.color = "red";
+		minfo.style.backgroundColor = "white";
+
+		setTimeout(function () {
+			minfo.firstChild.textContent = '';
+			minfo.style.border = '';
+			minfo.style.color = '';
+			minfo.style.backgroundColor = '';
+		}, 1500);
+	};
+	
 	// =============== SERWER ===============
 	// ======================================
 
