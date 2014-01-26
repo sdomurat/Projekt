@@ -7,7 +7,7 @@
 * [Zrzuty ekranu z gry](#zrzuty-ekranu-z-gry)
 
 ## Opis gry:
-Makao – gra karciana dla 2-4 graczy zwykle wystarcza jedna talia.
+Makao – gra karciana dla 2-4 graczy, dla których zwykle wystarcza jedna talia do gry.
 
 ## Karty funkcyjne:
 * As - zmiana koloru.
