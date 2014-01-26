@@ -54,7 +54,7 @@ Niektóre z kart posiadają dodatkowe funkcje:
 ![Wykres1](/images/zrzuty/8.png)
 ![Wykres1](/images/zrzuty/9.png)
 
-###Ządanie koloru
+###Żądanie koloru
 ![Wykres1](/images/zrzuty/10.png)
 
 ###Gracz ma jedną kartę, powiadomienie, że gracz może zaraz wygrać
