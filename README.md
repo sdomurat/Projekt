@@ -1,4 +1,4 @@
-# Projekt Zespolowy Makao
+# Projekt Zespolowy - Makao
 
 
 * [Opis gry](#opis-gry)
@@ -6,10 +6,10 @@
 * [Mały samouczek gry](#mały-samouczek-gry)
 * [Zrzuty ekranu z gry](#zrzuty-ekranu-z-gry)
 
-## Opis gry
+## Opis gry:
 Makao – gra karciana dla 2-4 graczy zwykle wystarcza jedna talia.
 
-## Zasady gry::
+## Zasady gry:
 Niektóre z kart posiadają dodatkowe funkcje:
 * As - zmiana koloru
 * Król czerwone serce - osoba grająca po tobie bierze 5 kart, chyba, że ma króla czarne serce to ty bierzesz 10 kart
@@ -19,7 +19,7 @@ Niektóre z kart posiadają dodatkowe funkcje:
 * 3 - trzy karty do wzięcia dla osoby przed tobą
 * 2 - dwie karty do wzięcia
 
-## Mały samouczek gry
+## Mały samouczek gry:
 * Rozpoczęcie gry zaczyna się od dołączenia do stolu
 * Klikniecie klawisza start
 * Wybranie karty przez kliknięcie na kartę, którą chcemy wybrać po wysunięciu (zaznaczeniu) karty wskazujemy miejsce karty czyli kupka, na którą chcemy rzucić kartę (jeśli jest zgodna z regułami gry)
@@ -31,8 +31,8 @@ Niektóre z kart posiadają dodatkowe funkcje:
 * Kolejne ruchy gry są analogiczne aż do pozbycia sie wszystkich swoich kart -> MAKAO
 * Gracz który wygrał ma możliwość oglądania gry reszty graczy i pisania na czacie z graczami.
 
-##Zrzuty ekranu z gry
-###Dołączenie do gry:
+##Zrzuty ekranu z gry:
+###Dołączenie do gry
 ![Wykres1](/images/zrzuty/1.png)
 
 ###Wybór karty:
