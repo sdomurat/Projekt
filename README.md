@@ -35,29 +35,29 @@ Niektóre z kart posiadają dodatkowe funkcje:
 ###Dołączenie do gry
 ![Wykres1](/images/zrzuty/1.png)
 
-###Wybór karty:
+###Wybór karty
 ![Wykres1](/images/zrzuty/2.png)
 
-###Dołożenie kart z głównej talii:
+###Dołożenie kart z głównej talii
 ![Wykres1](/images/zrzuty/7.png)	
 
 ###Komunikat złej karty (niezgodnej z zasadami gry):
 ![Wykres1](/images/zrzuty/3.png)
 
-###Komunikat nie Twojego ruchu:
+###Komunikat nie Twojego ruchu
 ![Wykres1](/images/zrzuty/4.png)
 
-###Wybór kilku kart do rzucenia:
+###Wybór kilku kart do rzucenia
 ![Wykres1](/images/zrzuty/5.png)
 
-###Żądanie figury:
+###Żądanie figury
 ![Wykres1](/images/zrzuty/8.png)
 ![Wykres1](/images/zrzuty/9.png)
 
-###Ządanie koloru:
+###Ządanie koloru
 ![Wykres1](/images/zrzuty/10.png)
 
-###Gracz ma jedną kartę, serwer powiadomia o tym, że gracz może zaraz wygrać:
+###Gracz ma jedną kartę, serwer powiadomia o tym, że gracz może zaraz wygrać
 ![Wykres1](/images/zrzuty/6.png)
 
 
