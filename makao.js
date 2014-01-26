@@ -486,7 +486,7 @@ $(document).ready(function () {
 	});
 
 	socket.on('nieTaKarta', function () {
-		errorInfo("NIe możesz rzycić tej karty!");
+		errorInfo("Nie możesz rzycić tej karty!");
 	});
 
 	socket.on('disconnectGracz', function (username) {

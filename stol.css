@@ -7,7 +7,6 @@ body {
 	padding: 0;
 	margin-bottom: 0;
 	margin-top: 0.5%;
-	background-image:url('images/makao.jpg');
 }
 div#gracze{
 	float: left;
@@ -22,8 +21,8 @@ div#gra {
 	position: relative;
 	border-radius: 10px;
 	border: 2px solid;
-	background-color: rgba(0, 128, 0, 0.65);
-	width: 70%;
+	background-color: ForestGreen;
+	width: 74%;
 	height: 99%;
 	float: left;
 }
@@ -32,10 +31,9 @@ div#interface {
 	position: relative;
 	border: 2px solid;
 	border-radius: 10px;
-	width: 23%;
+	width: 24%;
 	height: 99%;
 	float: right;
-	background-color: rgba(255, 255, 255, 0.80);
 }
 
 div#karta_gracza {
