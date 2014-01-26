@@ -2,7 +2,7 @@
 
 
 * [Opis gry](#opis-gry)
-* [Karty funkcyjne](#zasady-gry)
+* [Karty funkcyjne](#karty-funkcyjne)
 * [Mały samouczek gry](#mały-samouczek-gry)
 * [Zrzuty ekranu z gry](#zrzuty-ekranu-z-gry)
 
