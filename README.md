@@ -54,12 +54,6 @@ Makao – gra karciana dla 2-4 graczy, dla których zwykle wystarcza jedna talia
 ###Dołożenie kart z głównej talii.
 ![Wykres1](/images/zrzuty/7.png)	
 
-###Komunikat złej karty (niezgodnej z zasadami gry).
-![Wykres1](/images/zrzuty/3.png)
-
-###Komunikat nie Twojego ruchu.
-![Wykres1](/images/zrzuty/4.png)
-
 ###Wybór kilku kart do rzucenia.
 ![Wykres1](/images/zrzuty/5.png)
 
